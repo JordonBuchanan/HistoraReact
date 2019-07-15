@@ -1,13 +1,57 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background:#eee;
+  overflow-x:hidden;
+  height:100vh;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+h1,h2,h3,h4,h5,h6{
+  font-family: 'Raleway', sans-serif;
+
+}
+.logo{
+  font-weight:700;
+  font-size:34px;
+  color:#FAFAFA; 
+}
+input[type=text], input[type=password], input[type=email]{
+  border:1px solid #BDBDBD !important;
+  padding:0px !important;
+  font-size:14px !important;
+  border-radius:5px !important;
+  display:block;
+  margin:0 auto 5px !important;
+}
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus{
+  border: 2px solid #212121 !important;
+  box-shadow: none !important;
+}
+input[type=text]::placeholder, input[type=password]::placeholder, input[type=email]::placeholder{
+  padding:0 10px !important;
+}
+button, input[type=submit]{
+  color:#FAFAFA;
+  padding:15px 0px;
+  width:100%;
+  background:#212121;
+  border-radius:5px;
+  border:1px solid #FAFAFA;
+  font-weight:500;
+  letter-spacing: 0.1px;
+}
+small{
+  color: #4CAF50;
+}
+.accountSmall{
+  margin:5px 0;
+  color:#4f4f4f !important;
+}
+.bold{
+  font-weight:700;
+}
+.thin{
+  font-weight:100;
 }
