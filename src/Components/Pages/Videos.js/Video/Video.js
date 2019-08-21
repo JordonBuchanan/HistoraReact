@@ -24,7 +24,7 @@ const Wrapper = styled.div.attrs({
     & p{
         color:#4f4f4f;
         letter-spacing:0.5px;
-        font-size:16px;
+        font-size:14px;
         margin-bottom:0 !important;
     }
     & small{

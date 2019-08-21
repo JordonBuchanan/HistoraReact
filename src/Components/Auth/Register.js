@@ -5,7 +5,6 @@ import { registerUser } from '../../actions/authActions';
 import TextFieldGroup from '../Common/TextFieldGroup';
 import styled from 'styled-components';
 import Background from './registerBG.jpg';
-import { authenticationService } from '../../Services/Authentication-service';
 
 const Wrapper = styled.div.attrs({
     className: 'registerWrapper'

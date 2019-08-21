@@ -56,19 +56,19 @@ class Annoucements extends Component {
                         infiniteLoop={true}
                     >
                         <div>
-                            <img src="https://i.imgur.com/fJ4peln.jpg"/>
+                            <img alt="annoucement" src="https://i.imgur.com/fJ4peln.jpg"/>
                             <p className="legend">v1.02 Developer Notes
                                 <small>Latest patch notes and updates from the developer team</small>
                             </p>
                         </div>
                         <div>
-                            <img src="https://i.imgur.com/fExdD4Z.jpg"/>
+                            <img alt="annoucement" src="https://i.imgur.com/fExdD4Z.jpg"/>
                             <p className="legend">"Napoleon On Napoleon"
                                 <small>Read the autobiography of Le Emperor himself now added to Book List</small>
                             </p>
                         </div>
                         <div>
-                            <img src="https://i.imgur.com/O3etUni.jpg"/>
+                            <img alt="annoucement" src="https://i.imgur.com/O3etUni.jpg"/>
                             <p className="legend">Crossing the Rubicon
                                 <small>Indepth look at Julius Caesar's march into history</small>
                             </p>

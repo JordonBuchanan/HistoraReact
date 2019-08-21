@@ -23,6 +23,8 @@ const DashWrapper = styled.div.attrs({
   className: 'col s10'
 })`
   padding:0 !important;
+  height:100rem;
+  overflow:scroll;
 `
 
 class Dashboard extends Component {

@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import ProfileCard from '../ProfileCard/ProfileCard';
+import Books from './Books/Books'
+import PodcastMedia from './PodcastMedia/PodcastMedia';
+import VideosMedia from './VideosMedia/VideosMedia';
+import PaperMedia from './PaperMedia/PaperMedia';
+import MediaHero from './MediaHero/MediaHero';
 
 const Wrapper = styled.div.attrs({
   className: 'container-fluid'
@@ -28,7 +33,11 @@ class BooksDashboard extends Component {
             <Row>
               <ProfileCard/>
               <DashWrapper>
-
+                <MediaHero/>
+                <Books/>
+                <PodcastMedia/>
+                <VideosMedia/>
+                <PaperMedia/>
               </DashWrapper>
             </Row>
         </Wrapper>

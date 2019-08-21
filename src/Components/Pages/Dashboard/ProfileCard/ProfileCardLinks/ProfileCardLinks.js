@@ -51,8 +51,7 @@ class ProfileCardLinks extends Component {
                 <Link className="active" to="/dashboard"><I className="fas fa-bolt "></I> Discover</Link>
                 <Link to="/dashboard/settings"><I className="fas fa-th-large"></I> My Dashboard</Link>
                 <Link to="/dashboard/forum"><I className="fas fa-landmark "></I> The Forum</Link>
-                <Link to="/dashboard/books"><I className="fas fa-book "></I> Books</Link>
-                <Link to="/dashboard/papers"><I className="fas fa-scroll"></I> Papers</Link>
+                <Link to="/dashboard/books"><I className="fas fa-book "></I> Media</Link>
                 <Link to="/dashboard/historapicks"><I className="fas fa-star"></I> Histora's Picks</Link>
                 <small>Your Favorites</small>
             </Wrapper>

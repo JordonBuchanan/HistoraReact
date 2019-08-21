@@ -6,8 +6,8 @@ import { authenticationService } from '../../../../Services';
 const Wrapper = styled.div.attrs({
     className: 'col s2'
 })`
-    background: linear-gradient(-35deg, #212121, #424242);
-    height:215vh;
+    background: linear-gradient(-35deg,#424242, #212121);
+    height:100rem;
     width:100%;
     box-shadow:0 4px 8px rgba(0,0,0,0.4);
     text-align:center;

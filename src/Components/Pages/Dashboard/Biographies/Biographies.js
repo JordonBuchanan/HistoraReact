@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import BiographyCard from './BiographyCard/BiographyCard';
 import Biography from './Biography/Biography';
+import { AssetService } from '../../../../Services/AssetService';
 
 const Wrapper = styled.div.attrs({
     className: 'biographiesWrapper col s12'
@@ -39,45 +40,56 @@ const Title = styled.h4.attrs({
     }
 `
 
-
 class Biographies extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      isLoading: false,
+      biographies: [],
+      featured: []
+    };
+    this.onCLick = this.onClick.bind(this);
+  }
+  componentDidMount = async () => {
+    this.setState({ isLoading: true })
+    await AssetService.getBiographies().then(biographies => {
+      this.setState({
+        biographies: biographies.slice(0,6),
+        featured: biographies.slice(0,1),
+        isLoading: false,
+      })
+    })
+  }
+  onClick(biographies){
+      this.setState({
+          featured:[biographies],
+          isLoading: false
+      })
+  }
+
     render() {
+        const { biographies, featured } = this.state;
         return (
             <Wrapper>
                 <Title>Biographies <ViewAll>View All <i class="fas fa-chevron-right"></i></ViewAll></Title>
-                <BiographyCard
-                    name="Voltaire"
-                    image="https://i.imgur.com/41QmhH7.jpg"
-                    />
-                <BiographyCard
-                    name="Richard II"
-                    active="active"
-                    image="https://i.imgur.com/n9TIXGN.jpg"
-                    />
-                <BiographyCard
-                    name="Akhenaten"
-                    image="https://i.imgur.com/UvgL7yf.jpg"
-                    />
-                <BiographyCard
-                    name="Caligula"
-                    image="https://i.imgur.com/lVh1I9H.jpg"
-                    />
-                <BiographyCard
-                    name="Napoleon"
-                    image="https://i.imgur.com/fExdD4Z.jpg"
-                    />
-                <BiographyCard
-                    name="Isaac Newton"
-                    image="https://i.imgur.com/UUqw4cg.png"
-                    />
-                <Biography
-                    name="Richard II Plantagenet"
-                    title="English King"
-                    birthDate="January 6th 1367"
-                    deathDate="February 14th 1400"
-                    image="https://i.imgur.com/n9TIXGN.jpg"
-                    description="Richard II also known as Richard of Bordeaux, was King of England from 1377 until he was deposed in 1399. Richard's father, Edward the Black Prince, died in 1376, leaving Richard as heir apparent to King Edward III. Upon the death of his grandfather Edward III, the 10-year-old Richard succeeded to the throne."
-                    />
+                {biographies.map(biographies => 
+                    <BiographyCard
+                        name={biographies.name}
+                        image={biographies.image}
+                        key={biographies.id}
+                        onClick={() => this.onClick(biographies)}
+                        />
+                )}
+                {featured.map(featured => 
+                    <Biography
+                        name={featured.name}
+                        title={featured.title}
+                        birthDate={featured.birthDate}
+                        deathDate={featured.deathDate}
+                        image={featured.image}
+                        description={featured.description}
+                        />
+                )}
             </Wrapper>
         )
     }

@@ -9,6 +9,7 @@ const BiographyCardWrapper = styled.div.attrs({
     background-size:cover !important;
     background-position: center !important;
     color:#FAFAFA;
+    cursor:pointer;
     height:150px;
     opacity:0.75;
     transition:0.3s;
@@ -31,11 +32,12 @@ const BiographyCard = ({
     name,
     image,
     active,
-    link
+    link,
+    onClick
 }) => {
     return (
         <div className="col s2">
-            <BiographyCardWrapper style={{background: `linear-gradient(-35deg, rgba(0,0,0,0), rgba(0,0,0,0.7)), url(${image})`}}>
+            <BiographyCardWrapper onClick={onClick} style={{background: `linear-gradient(-35deg, rgba(0,0,0,0), rgba(0,0,0,0.7)), url(${image})`}}>
                 <H6>{name}</H6>
             </BiographyCardWrapper>
         </div>
@@ -46,6 +48,7 @@ BiographyCard.propTypes = {
     name: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     link: PropTypes.string,
+    onCLick: PropTypes.func.isRequired,
 }
 
 BiographyCard.defaultProps = {

@@ -44,7 +44,7 @@ const BlogPost = () => {
         <Wrapper>
             <div className="row">
                 <div className="col s12" id="postImgDiv">
-                    <img alt="Post Picture" src={Placeholder}/>
+                    <img alt="Post" src={Placeholder}/>
                 </div>
                 <div className="col s12" id="postDiv">
                     <small>June 8th 2019</small>

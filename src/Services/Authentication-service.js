@@ -10,9 +10,13 @@ export const authenticationService = {
     loginAdmin,
     logout,
     currentUser: currentUserSubject.asObservable(),
-    get currentUserValue() { return currentUserSubject.value },
+    get currentUserValue() { 
+        return currentUserSubject.value 
+    },
     currentAdmin: currentAdminSubject.asObservable(),
-    get currentAdminValue() { return currentAdminSubject.value }
+    get currentAdminValue() { 
+        return currentAdminSubject.value 
+    }
 };
 
 function login(email, password){

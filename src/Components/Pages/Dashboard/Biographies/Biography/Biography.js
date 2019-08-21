@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const NewsCardWrapper = styled.div.attrs({
-    className: 'newsCard z-depth-3 col s12'
+    className: 'newsCard col s12 z-depth-4'
 })`
     color:#212121;
-    height:250px;
     margin-top: 25px;
+    height:400px;
     padding: 0px !important;
     background:#FAFAFA;
     border-radius:10px;
@@ -30,6 +30,13 @@ const NewsCardWrapper = styled.div.attrs({
         color:#212121;
     }
 `
+
+const SubWrapper = styled.div.attrs({
+    className: 'col s9'
+})`
+    overflow: auto;
+    padding: 15px 25px !important;
+`
 const H3 = styled.h3.attrs({
     className: 'newsCardTitle'
 })`
@@ -45,12 +52,13 @@ const P = styled.p.attrs({
     color:#616161;
 `
 const IMG = styled.div.attrs({
-    className: 'biographyImg z-depth-2'
+    className: 'biographyImg '
 })`
-    height:265px;
+    height:400px;
     width:100%;
-    margin-top:-7.5px;
-    border-radius:10px;
+    background-position:center !important;
+    border-top-left-radius:10px;
+    border-bottom-left-radius:10px;
     background-size:cover !important;
 `
 const Date = styled.p.attrs({
@@ -74,12 +82,12 @@ const Biography = ({
             <div className="col s3" style={{padding: '0'}}>
                 <IMG style={{background: `linear-gradient(to bottom, rgba(0,0,0,0), #FAFAFAdc), url(${image})`}}></IMG>
             </div>
-            <div className="col s9" style={{padding: "15px 25px"}}>
+            <SubWrapper>
                 <small>{title}</small>
                 <H3>{name}</H3>
                 <Date>{birthDate} - {deathDate}</Date>
                 <P>{description}</P>
-            </div>
+            </SubWrapper>
         </NewsCardWrapper>
     )
   }
