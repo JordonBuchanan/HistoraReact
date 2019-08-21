@@ -86,7 +86,7 @@ const AssetCard = ({
                                 <ErrorMessage name="title" component="div" className="invalid-feedback" />
                             </div>
                             <div>
-                                <label htmlFor="body">Description</label>
+                                <label htmlFor="description">Description</label>
                                 <Field name="description" component="textarea" rows="10" placeholder="Description" type="text" className={(errors.description && touched.description ? ' is-invalid' : '')} />
                                 <ErrorMessage name="description" component="div" className="invalid-feedback" />
                             </div>

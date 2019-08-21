@@ -34,7 +34,7 @@ class AdminNav extends Component {
             <Link to="/admindash">Statistics</Link>
             <Link to="/admindash/adminmedia" className="active">Media</Link>
             <Link to="/admindash/adminassets">Main Assets</Link>
-            <Link to="/admindash/adminassets">Etc</Link>
+            <Link to="/admindash/adminetc">Etc</Link>
         </AdminNavbar>
         );
     }

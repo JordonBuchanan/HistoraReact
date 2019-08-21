@@ -28,6 +28,7 @@ import BlogWriter from './Components/Pages/AdminDash/BlogWriter/BlogWriter';
 import DeveloperPortal from './Components/Pages/DeveloperPortal/DeveloperPortal';
 import AdminMedia from './Components/Pages/AdminDash/AdminMedia/AdminMedia';
 import AdminAssets from './Components/Pages/AdminDash/AdminAssets/AdminAssets';
+import AdminEtc from './Components/Pages/AdminDash/AdminEtc/AdminEtc';
 
 window.flash = (message, type="success") => Bus.emit('flash',
 ({message, type}))
@@ -59,6 +60,7 @@ class App extends React.Component {
             <AdminPrivateRoute exact path="/admindash" component={ AdminDash } />
             <AdminPrivateRoute exact path="/admindash/adminmedia" component={ AdminMedia } />
             <AdminPrivateRoute exact path="/admindash/adminassets" component={ AdminAssets } />
+            <AdminPrivateRoute exact path="/admindash/adminetc" component={ AdminEtc } />
             <AdminPrivateRoute exact path="/blogwriter" component={ BlogWriter } />
             <Footer />
           </div>

@@ -21,6 +21,12 @@ export const AssetService = {
     addVideo,
     getPodcasts,
     addPodcast,
+    getPicks,
+    addPick,
+    getAnnoucements,
+    addAnnoucement,
+    getFacts,
+    addFact,
     currentUser: currentUserSubject.asObservable(),
     get currentUserValue() { 
         return currentUserSubject.value 
@@ -128,5 +134,47 @@ function addPodcast(data){
 function getPodcasts(){
     const requestOptions = { method: 'GET', headers: authHeader() || adminAuthHeader() };
     return fetch(`http://localhost:5000/api/podcasts`, requestOptions).then(handleResponse);
+}
+
+function addPick(data){
+    const params = {data, admin: currentAdminSubject.value, headers: authHeader() || adminAuthHeader()}
+    axios
+    .post('http://localhost:5000/api/historapicks/add', params)
+    .catch(err =>
+        console.log('error')
+    );
+}
+
+function getPicks(){
+    const requestOptions = { method: 'GET', headers: authHeader() || adminAuthHeader() };
+    return fetch(`http://localhost:5000/api/historapicks`, requestOptions).then(handleResponse);
+}
+
+function addFact(data){
+    const params = {data, admin: currentAdminSubject.value, headers: authHeader() || adminAuthHeader()}
+    axios
+    .post('http://localhost:5000/api/facts/add', params)
+    .catch(err =>
+        console.log('error')
+    );
+}
+
+function getFacts(){
+    const requestOptions = { method: 'GET', headers: authHeader() || adminAuthHeader() };
+    return fetch(`http://localhost:5000/api/facts`, requestOptions).then(handleResponse);
+}
+
+function addAnnoucement(data){
+    const params = {data, admin: currentAdminSubject.value, headers: authHeader() || adminAuthHeader()}
+    axios
+    .post('http://localhost:5000/api/annoucements/add', params)
+    .catch(err =>
+        console.log('error')
+    );
+}
+
+function getAnnoucements(){
+    const requestOptions = { method: 'GET', headers: authHeader() || adminAuthHeader() };
+    return fetch(`http://localhost:5000/api/annoucements`, requestOptions).then(handleResponse);
 }
 

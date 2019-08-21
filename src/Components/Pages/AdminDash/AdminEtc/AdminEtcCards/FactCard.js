@@ -46,11 +46,10 @@ const TabWrapper = styled.div.attrs({
     className: 'col s4'
 })``
 
-const AdminDashCard = ({
+const FactCard = ({
     body,
     title,
     icon,
-    endpoint,
 }) => {
         return (
             <TabWrapper>
@@ -60,66 +59,29 @@ const AdminDashCard = ({
                     <p>{body}</p>
                     <Formik 
                     initialValues={{
-                        title:'',
-                        image:'',
-                        body: '',
-                        author: '',
-                        source: '',
-                        link: ''
+                        body:'',
+                        source:'',
                     }}
                     validationSchema={Yup.object().shape({
-                        title: Yup.string().required('Title is required'),
-                        image: Yup.string().required('Image is required'),
-                        author: Yup.string().required('Author is required'),
-                        source: Yup.string().required('Source is required'),
-                        link: Yup.string().required('Link is required'),
+                        body: Yup.string().required('Body is required'),
+                        source: Yup.string().required('Source is required')
                     })}
                     onSubmit={(values, { setSubmitting, resetForm }) => {
-                        if(endpoint === 'booksMedia'){
-                            AssetService.addBookMedia(values);
-                        } else if (endpoint === 'videosMedia'){
-                            AssetService.addVideoMedia(values);
-                        } else if (endpoint === 'papersMedia'){
-                            AssetService.addPaperMedia(values);
-                        } else if (endpoint === "podcastsMedia"){
-                            AssetService.addPodcastMedia(values);
-                        } else if (endpoint === "biographiesMedia"){
-                            AssetService.addBiography(values);
-                        }
+                        AssetService.addFact(values);
                         setSubmitting(false);
                         resetForm();
                       }}
                     render={({ errors, status, touched, isSubmitting }) => (
                         <Form>
                             <div>
-                                <label htmlFor="title">Title</label>
-                                <Field name="title" placeholder="Title" type="text" className={(errors.title && touched.title ? ' is-invalid' : '')} />
-                                <ErrorMessage name="title" component="div" className="invalid-feedback" />
-                            </div>
-                            <div>
-                                <label htmlFor="image">Image</label>
-                                <Field name="image" placeholder="Image" type="text" className={(errors.image && touched.image ? ' is-invalid' : '')} />
-                                <ErrorMessage name="image" component="div" className="invalid-feedback" />
-                            </div>
-                            <div>
                                 <label htmlFor="body">Body</label>
-                                <Field name="body" component="textarea" rows="10" placeholder="Body(optional)" type="text" className={(errors.body && touched.body ? ' is-invalid' : '')} />
+                                <Field name="body" placeholder="Body" type="text" className={(errors.body && touched.body ? ' is-invalid' : '')} />
                                 <ErrorMessage name="body" component="div" className="invalid-feedback" />
-                            </div>
-                            <div>
-                                <label htmlFor="author">Author</label>
-                                <Field name="author" placeholder="Author" type="text" className={(errors.author && touched.author ? ' is-invalid' : '')} />
-                                <ErrorMessage name="author" component="div" className="invalid-feedback" />
                             </div>
                             <div>
                                 <label htmlFor="source">Source</label>
                                 <Field name="source" placeholder="Source" type="text" className={(errors.source && touched.source ? ' is-invalid' : '')} />
                                 <ErrorMessage name="source" component="div" className="invalid-feedback" />
-                            </div>
-                            <div>
-                                <label htmlFor="link">Link</label>
-                                <Field name="link" placeholder="Link" type="text" className={(errors.link && touched.link ? ' is-invalid' : '')} />
-                                <ErrorMessage name="link" component="div" className="invalid-feedback" />
                             </div>
                             <div>
                                 <button type="submit" disabled={isSubmitting}>Post</button>
@@ -138,15 +100,14 @@ const AdminDashCard = ({
         )
   }
 
-AdminDashCard.propTypes = {
+FactCard.propTypes = {
     title: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
     icon: PropTypes.string.isRequired,
-    endpoint: PropTypes.string.isRequired,
 }
 
-AdminDashCard.defaultProps = {
+FactCard.defaultProps = {
     type: 'text'
 }
 
-export default AdminDashCard;
+export default FactCard;

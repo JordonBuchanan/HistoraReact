@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import AdminDashCard from '../AdminDashCard/AdminDashCard';
+import AdminDashCard from './AdminDashCard/AdminDashCard';
 import BioAdminCard from './BioAdminCard/BioAdminCard';
 import AdminNav from '../AdminNav/AdminNav';
 

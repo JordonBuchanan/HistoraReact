@@ -46,7 +46,7 @@ const TabWrapper = styled.div.attrs({
     className: 'col s4'
 })``
 
-const BioAdminCard = ({
+const PicksCard = ({
     body,
     title,
     icon,
@@ -59,64 +59,39 @@ const BioAdminCard = ({
                     <p>{body}</p>
                     <Formik 
                     initialValues={{
-                        name:'',
                         image:'',
-                        title: '',
-                        nationality: '',
-                        birthDate: '',
-                        deathDate: '',
-                        description: ''
+                        title:'',
+                        thoughts:'',
+                        link:''
                     }}
                     validationSchema={Yup.object().shape({
-                        name: Yup.string().required('Name is required'),
-                        image: Yup.string().required('Image is required'),
                         title: Yup.string().required('Title is required'),
-                        nationality: Yup.string().required('Nationality is required'),
-                        birthDate: Yup.string().required('Birth date is required'),
-                        deathDate: Yup.string().required('Death date is required'),
-                        description: Yup.string().required('Description is required'),
+                        thoughts: Yup.string().required('Thoughts is required')
                     })}
                     onSubmit={(values, { setSubmitting, resetForm }) => {
-                        AssetService.addBiography(values);
+                        AssetService.addPick(values);
                         setSubmitting(false);
                         resetForm();
                       }}
                     render={({ errors, status, touched, isSubmitting }) => (
                         <Form>
                             <div>
-                                <label htmlFor="name">Name</label>
-                                <Field name="name" placeholder="Name" type="text" className={(errors.name && touched.name ? ' is-invalid' : '')} />
-                                <ErrorMessage name="name" component="div" className="invalid-feedback" />
-                            </div>
-                            <div>
-                                <label htmlFor="image">Image</label>
-                                <Field name="image" placeholder="Image" type="text" className={(errors.image && touched.image ? ' is-invalid' : '')} />
-                                <ErrorMessage name="image" component="div" className="invalid-feedback" />
-                            </div>
-                            <div>
                                 <label htmlFor="title">Title</label>
                                 <Field name="title" placeholder="Title" type="text" className={(errors.title && touched.title ? ' is-invalid' : '')} />
                                 <ErrorMessage name="title" component="div" className="invalid-feedback" />
                             </div>
                             <div>
-                                <label htmlFor="nationality">Nationality</label>
-                                <Field name="nationality" placeholder="Nationality" type="text" className={(errors.nationality && touched.nationality ? ' is-invalid' : '')} />
-                                <ErrorMessage name="nationality" component="div" className="invalid-feedback" />
+                                <label htmlFor="image">Image(optional)</label>
+                                <Field name="image" placeholder="Image" type="text" />
                             </div>
                             <div>
-                                <label htmlFor="birthDate">Birth Date</label>
-                                <Field name="birthDate" placeholder="Birth Date" type="text" className={(errors.birthDate && touched.birthDate ? ' is-invalid' : '')} />
-                                <ErrorMessage name="birthDate" component="div" className="invalid-feedback" />
+                                <label htmlFor="thoughts">Thoughts</label>
+                                <Field name="thoughts"  component="textarea" rows="10"  placeholder="Thoughts" type="text" className={(errors.thoughts && touched.thoughts ? ' is-invalid' : '')} />
+                                <ErrorMessage name="thoughts" component="div" className="invalid-feedback" />
                             </div>
                             <div>
-                                <label htmlFor="deathDate">Death Date</label>
-                                <Field name="deathDate" placeholder="Death Date" type="text" className={(errors.deathDate && touched.deathDate ? ' is-invalid' : '')} />
-                                <ErrorMessage name="deathDate" component="div" className="invalid-feedback" />
-                            </div>
-                            <div>
-                                <label htmlFor="description">Description</label>
-                                <Field name="description" component="textarea" cols="3" placeholder="Description" type="text" className={(errors.description && touched.description ? ' is-invalid' : '')} />
-                                <ErrorMessage name="description" component="div" className="invalid-feedback" />
+                                <label htmlFor="link">Link(optional)</label>
+                                <Field name="link" placeholder="Link" type="text" />
                             </div>
                             <div>
                                 <button type="submit" disabled={isSubmitting}>Post</button>
@@ -135,14 +110,14 @@ const BioAdminCard = ({
         )
   }
 
-BioAdminCard.propTypes = {
+PicksCard.propTypes = {
     title: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
     icon: PropTypes.string.isRequired,
 }
 
-BioAdminCard.defaultProps = {
+PicksCard.defaultProps = {
     type: 'text'
 }
 
-export default BioAdminCard;
+export default PicksCard;
