@@ -10,7 +10,7 @@ const Wrapper = styled.div.attrs({
     max-width: 90%;
     bottom:0;
     margin: 25px 7% 0 !important;
-    padding:15px 10px 15px 10px !important
+    padding:10px 10px 20px!important
     border-radius:10px;
 `
 const H3 = styled.h5.attrs({

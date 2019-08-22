@@ -60,13 +60,13 @@ const AnnoucementCard = ({
                     <Formik 
                     initialValues={{
                         title:'',
-                        text:'',
+                        body:'',
                         image:'',
-                        link: ''
+                        link: '',
                     }}
                     validationSchema={Yup.object().shape({
                         title: Yup.string().required('Title is required'),
-                        description: Yup.string().required('Description is required'),
+                        body: Yup.string().required('Body is required'),
                         image: Yup.string().required('Image is required'),
                     })}
                     onSubmit={(values, { setSubmitting, resetForm }) => {
@@ -87,14 +87,13 @@ const AnnoucementCard = ({
                                 <ErrorMessage name="image" component="div" className="invalid-feedback" />
                             </div>
                             <div>
-                                <label htmlFor="text">Description</label>
-                                <Field name="text" component="textarea" rows="10" placeholder="Description" type="text" className={(errors.text && touched.text ? ' is-invalid' : '')} />
-                                <ErrorMessage name="text" component="div" className="invalid-feedback" />
+                                <label htmlFor="body">Description</label>
+                                <Field name="body" component="textarea" rows="10" placeholder="Description" type="text" className={(errors.body && touched.body ? ' is-invalid' : '')} />
+                                <ErrorMessage name="body" component="div" className="invalid-feedback" />
                             </div>
                             <div>
                                 <label htmlFor="link">Link(optional)</label>
-                                <Field name="link" placeholder="Link" type="text" className={(errors.link && touched.link ? ' is-invalid' : '')} />
-                                <ErrorMessage name="link" component="div" className="invalid-feedback" />
+                                <Field name="link" placeholder="Link" type="text" />
                             </div>
                             <div>
                                 <button type="submit" disabled={isSubmitting}>Post</button>

@@ -62,11 +62,13 @@ const PicksCard = ({
                         image:'',
                         title:'',
                         thoughts:'',
+                        view:'',
                         link:''
                     }}
                     validationSchema={Yup.object().shape({
                         title: Yup.string().required('Title is required'),
-                        thoughts: Yup.string().required('Thoughts is required')
+                        thoughts: Yup.string().required('Thoughts is required'),
+                        view: Yup.string().required('View is required')
                     })}
                     onSubmit={(values, { setSubmitting, resetForm }) => {
                         AssetService.addPick(values);
@@ -88,6 +90,17 @@ const PicksCard = ({
                                 <label htmlFor="thoughts">Thoughts</label>
                                 <Field name="thoughts"  component="textarea" rows="10"  placeholder="Thoughts" type="text" className={(errors.thoughts && touched.thoughts ? ' is-invalid' : '')} />
                                 <ErrorMessage name="thoughts" component="div" className="invalid-feedback" />
+                            </div>
+                            <div>
+                                <label htmlFor="view">View</label>
+                                <Field style={{ display: 'block' }} component="select" name="view" className={(errors.view && touched.view ? ' is-invalid' : '')}>
+                                    <option label="View">View</option>
+                                    <option value="youtube" label="Youtube">Youtube</option>
+                                    <option value="article" label="Article">Article</option>
+                                    <option value="biography" label="Biography">Biography</option>
+                                    <option value="none" label="None">None</option>
+                                </Field>
+                                <ErrorMessage name="view" component="div" className="invalid-feedback" />
                             </div>
                             <div>
                                 <label htmlFor="link">Link(optional)</label>

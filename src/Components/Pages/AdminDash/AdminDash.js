@@ -21,6 +21,10 @@ class AdminDash extends Component {
         <Wrapper>
             <Row>
               <AdminNav/>
+              <h1>Main Admin Dashboard</h1>
+              <ul>
+                <li>User Management?</li>
+              </ul>
             </Row>
         </Wrapper>
         );

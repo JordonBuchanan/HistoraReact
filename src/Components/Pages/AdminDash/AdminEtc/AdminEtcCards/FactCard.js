@@ -64,7 +64,6 @@ const FactCard = ({
                     }}
                     validationSchema={Yup.object().shape({
                         body: Yup.string().required('Body is required'),
-                        source: Yup.string().required('Source is required')
                     })}
                     onSubmit={(values, { setSubmitting, resetForm }) => {
                         AssetService.addFact(values);
@@ -79,9 +78,8 @@ const FactCard = ({
                                 <ErrorMessage name="body" component="div" className="invalid-feedback" />
                             </div>
                             <div>
-                                <label htmlFor="source">Source</label>
-                                <Field name="source" placeholder="Source" type="text" className={(errors.source && touched.source ? ' is-invalid' : '')} />
-                                <ErrorMessage name="source" component="div" className="invalid-feedback" />
+                                <label htmlFor="source">Source(optional)</label>
+                                <Field name="source" placeholder="Source" type="text" />
                             </div>
                             <div>
                                 <button type="submit" disabled={isSubmitting}>Post</button>

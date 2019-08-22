@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components'
+import { AssetService } from '../../../../../Services/AssetService';
 
 const Wrapper = styled.div.attrs({
     className: "col s9"
@@ -22,13 +23,34 @@ const Signature = styled.small.attrs({
 `
 
 class Fact extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+          facts:[],
+          allFacts:[],
+          isLoading: false
+        };
+      }
+      componentDidMount = async () => {
+        this.setState({ isLoading: true })
+        await AssetService.getFacts().then(facts => {
+          this.setState({
+            facts: facts.slice(0,1),
+            allFacts: facts,
+            isLoading: false,
+          })
+        })
+      }
     render() {
+        const { facts, allFacts } = this.state;
         return (
             <Wrapper>
+                {facts.map(facts => 
                 <Quote>
-                “The difference between Pride Jaguar and the Drago-Kazov? A Jaguar will stab you in the back to gain an advantage. a Dragan will stab you just to see if his knife is sharp.”  
-                    <Signature>~Charlemagne</Signature>
-                </Quote> 
+                    {facts.body}
+                    <Signature>{facts.source}</Signature>
+                </Quote>
+                )}
             </Wrapper>
         )
     }

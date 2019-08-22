@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import ProfileCard from '../ProfileCard/ProfileCard';
-import ArticlePick from './ArticlePick/ArticlePick';
-import VideoPick from './VideoPick/VideoPick';
-import FigurePick from './FigurePick/FigurePick';
+import PickDisplayCard from './PickDisplayCard/PickDisplayCard';
+import { AssetService } from '../../../../Services/AssetService'
 
 const Wrapper = styled.div.attrs({
   className: 'container-fluid'
@@ -51,7 +50,26 @@ const P = styled.p.attrs({
 `
 
 class HistoraPicksDashboard extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      picks:[],
+      allPicks:[],
+      isLoading: false
+    };
+  }
+  componentDidMount = async () => {
+    this.setState({ isLoading: true })
+    await AssetService.getPicks().then(picks => {
+      this.setState({
+        picks: picks.slice(0,3),
+        allpicks: picks,
+        isLoading: false,
+      })
+    })
+  }
     render() {
+      const { picks } = this.state;
       return (
         <Wrapper>
             <Row>
@@ -59,9 +77,15 @@ class HistoraPicksDashboard extends Component {
               <DashWrapper>
                 <Title>Histora's Picks</Title>
                 <P>Histora Team's handpicked favorites from across the internet</P>
-                <VideoPick/>
-                <ArticlePick/>
-                <FigurePick/>
+                {picks.map(picks => 
+                  <PickDisplayCard
+                    title={picks.title}
+                    thoughts={picks.thoughts}
+                    view={picks.view}
+                    image={picks.image}
+                    link={picks.link}
+                  />
+                )}
               </DashWrapper>
             </Row>
         </Wrapper>
