@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
+import { AssetService } from '../../../../Services/AssetService';
+import AnnoucementCard from './AnnoucementCard/AnnoucementCard';
 
 const Wrapper = styled.div.attrs({
     className: 'col s12 z-depth-4'
@@ -42,7 +44,26 @@ const Wrapper = styled.div.attrs({
 `
 
 class Annoucements extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+          annoucements:[],
+          allAnnoucements:[],
+          isLoading: false
+        };
+      }
+      componentDidMount = async () => {
+        this.setState({ isLoading: true })
+        await AssetService.getAnnoucements().then(annoucements => {
+          this.setState({
+            annoucements: annoucements.slice(0,3),
+            allAnnoucements: annoucements,
+            isLoading: false,
+          })
+        })
+      }
     render() {
+        const { annoucements } = this.state;
         return (
             <div className="col s12">
                 <Wrapper>
@@ -55,24 +76,14 @@ class Annoucements extends Component {
                         interval={5000}
                         infiniteLoop={true}
                     >
-                        <div>
-                            <img alt="annoucement" src="https://i.imgur.com/fJ4peln.jpg"/>
-                            <p className="legend">v1.02 Developer Notes
-                                <small>Latest patch notes and updates from the developer team</small>
-                            </p>
-                        </div>
-                        <div>
-                            <img alt="annoucement" src="https://i.imgur.com/fExdD4Z.jpg"/>
-                            <p className="legend">"Napoleon On Napoleon"
-                                <small>Read the autobiography of Le Emperor himself now added to Book List</small>
-                            </p>
-                        </div>
-                        <div>
-                            <img alt="annoucement" src="https://i.imgur.com/O3etUni.jpg"/>
-                            <p className="legend">Crossing the Rubicon
-                                <small>Indepth look at Julius Caesar's march into history</small>
-                            </p>
-                        </div>
+                    {annoucements.map(annoucements => 
+                        <AnnoucementCard
+                            title={annoucements.title}
+                            body={annoucements.body}
+                            image={annoucements.image}
+                            link={annoucements.link}
+                        />
+                    )}
                     </Carousel>
                 </Wrapper>
             </div>

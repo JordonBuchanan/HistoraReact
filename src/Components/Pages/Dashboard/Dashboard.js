@@ -24,7 +24,6 @@ const DashWrapper = styled.div.attrs({
 })`
   padding:0 !important;
   height:100rem;
-  overflow:scroll;
 `
 
 class Dashboard extends Component {
