@@ -12,7 +12,6 @@ const Wrapper = styled.div.attrs({
     border-radius:10px;
     padding: 0 !important;
     background-size:cover !important;
-    cursor:pointer;
     transition:0.3s;
     &:hover{
         margin-top:-10px;
@@ -20,7 +19,6 @@ const Wrapper = styled.div.attrs({
     }
     .hbadge{
         position:absolute;
-        bottom: 10px;
     }
 `
 
@@ -29,6 +27,16 @@ const Title = styled.h5.attrs({
 })`
     font-weight:700;
     padding:0 10px;
+    opacity:0.7;
+    transition:0.3s;
+    a{
+        color: white !important;
+
+    }
+    &:hover{
+        opacity:1;
+        transition:0.3s;
+    }
 `
 
 const Author = styled.p.attrs({
@@ -44,7 +52,8 @@ const Author = styled.p.attrs({
 const Favorite = styled.i.attrs({
     className: 'far fa-heart'
 })`
-padding:0 10px;
+    padding:0 10px;
+    cursor:pointer;
 `
 
 
@@ -57,8 +66,8 @@ const LatestBook = ({
 }) => {
     return (
             <div className="col s4">
-                <Wrapper href={link} style={{background: `linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,0.8)), url(${image})`}}>
-                    <Title>{title}</Title>
+                <Wrapper style={{background: `linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,0.8)), url(${image})`}}>
+                    <Title><a href={link}>{title}</a></Title>
                     <Author>{author}</Author>
                     <Favorite></Favorite>
                     <div className="hbadge">{source}</div>

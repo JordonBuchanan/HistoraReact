@@ -12,10 +12,8 @@ const BookWrapper = styled.div.attrs({
     padding:0 !important;
     box-shadow: 0 4px 8px rgba(0,0,0,0.4);
     border-radius:10px;
-    cursor:pointer;
     .hbadge{
         position:absolute;
-        bottom: 10px;
     }
     transition:0.3s;
     &:hover{
@@ -29,6 +27,16 @@ const Title = styled.h6.attrs({
 })`
     font-weight:700;
     padding:0 10px;
+    opacity:0.7;
+    transition:0.3s;
+    a{
+        color: white !important;
+
+    }
+    &:hover{
+        opacity:1;
+        transition:0.3s;
+    }
 `
 
 const Author = styled.p.attrs({
@@ -45,6 +53,7 @@ const Favorite = styled.i.attrs({
     className: 'far fa-heart'
 })`
     padding:0 10px;
+    cursor:pointer;
 `
 
 const Book = ({
@@ -57,8 +66,8 @@ const Book = ({
 }) => {
     return (
         <div className="col s2">
-            <BookWrapper href={link} style={{background: `linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,0.8)), url(${image})`}}>
-                <Title>{title}</Title>
+            <BookWrapper  style={{background: `linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,0.8)), url(${image})`}}>
+                <Title><a href={link}>{title}</a></Title>
                 <Author>{author}</Author>
                 <Favorite onClick={onFavorite}></Favorite>
                 <div className="hbadge">{source}</div>
