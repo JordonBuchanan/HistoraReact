@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import youtube from '../../../../../Services/VideoMediaService';
+import { AssetService } from '../../../../../Services/AssetService';
 import styled from 'styled-components';
-import MediaCard from '../MediaCard/MediaCard'
+import MediaCard from '../MediaCard/MediaCard';
 
 const Wrapper = styled.div.attrs({
   className: 'col s6'
@@ -41,16 +41,18 @@ class VideosMedia extends Component {
   state = {
     isLoading: false,
     videos: [],
+    allVideos:[]
   }
   componentDidMount = async () => {
     this.setState({ isLoading: true })
-    const response = await youtube.get();
-    this.setState({
-      videos: response.data.items,
-      isLoading: false
+    await AssetService.getVideoMedias().then(videos => {
+      this.setState({
+        videos: videos.slice(0,4),
+        allVideos: videos,
+        isLoading: false,
+      })
     })
-      console.log(this.state.videos);
-    }
+  }
     render() {
       const { videos } = this.state;
       return (
@@ -58,10 +60,11 @@ class VideosMedia extends Component {
           <Title>Videos <ViewAll>View All <i class="fas fa-chevron-right"></i></ViewAll></Title>
           {videos.map(videos => 
             <MediaCard
-              title={videos.snippet.title}
-              author={videos.snippet.channelTitle}
-              image={videos.snippet.thumbnails.medium.url}
-              source="Youtube"
+              title={videos.title}
+              author={videos.author}
+              image={videos.image}
+              source={videos.source}
+              link={videos.link}
             />
           )}
         </Wrapper>

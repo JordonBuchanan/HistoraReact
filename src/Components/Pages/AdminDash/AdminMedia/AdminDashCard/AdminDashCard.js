@@ -69,7 +69,6 @@ const AdminDashCard = ({
                     }}
                     validationSchema={Yup.object().shape({
                         title: Yup.string().required('Title is required'),
-                        image: Yup.string().required('Image is required'),
                         author: Yup.string().required('Author is required'),
                         source: Yup.string().required('Source is required'),
                         link: Yup.string().required('Link is required'),

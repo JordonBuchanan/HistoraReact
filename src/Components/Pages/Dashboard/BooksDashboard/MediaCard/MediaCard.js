@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Youtube from 'react-youtube';
 
 const CardWrapper = styled.div.attrs({
     className: 'mediaCardWrapper col s12'
@@ -14,8 +15,9 @@ const CardWrapper = styled.div.attrs({
         margin-top:25px;
         padding-left: 10px;
     }
-    h6{
+    p{
       width:18vw
+      margin:10px 0 0px;
     }
 
 `
@@ -38,19 +40,53 @@ const Image = styled.div.attrs({
     height:65px;
     background-size:cover !important;
 `
+const YoutubeDiv = styled.div.attrs({
+    className: 'videosMediaDiv'
+})`
+    height:65px;
+    width:65px !important;
+    overflow:hidden !important;
+    display:inline-block;
+    float:left;
+    border-top-left-radius:10px;
+    border-bottom-left-radius:10px;
+`
+
+const _onReady = (event) => {
+    event.target.pauseVideo();
+}
+
+const opts = {
+    height: '65',
+    width: '65',
+    playerVars: {
+    },
+};
 
 const MediaCard = ({
     title,
     image,
     author,
     source,
+    link
 }) => {
     return (
         <CardWrapper>
             <SubWrapper>
-                <Image style={{background: `url(${image})`}}></Image>
+                {source === "Youtube" &&
+                <YoutubeDiv>
+                    <Youtube
+                        videoId={link}
+                        opts={opts}
+                        onReady={_onReady}
+                   />
+                   </YoutubeDiv>
+                }
+                {source !== "Youtube" &&
+                    <Image style={{background: `url(${image})`}}></Image>
+                }
                 <div className="col s7">
-                    <h6 className="truncate">{title}</h6>
+                    <p className="truncate">{title}</p>
                     <small>{author}</small>
                 </div>
                 <div className="col s1">
@@ -69,7 +105,8 @@ MediaCard.propTypes = {
     title: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
-    source: PropTypes.string
+    source: PropTypes.string,
+    link: PropTypes.string
 }
 
 MediaCard.defaultProps = {
