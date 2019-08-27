@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import NewsCard from './NewsCard/NewsCard';
+import { NewsAsset } from '../../../../Services/NewsAsset';
 
 const Wrapper = styled.div.attrs({
     className: 'historyNewsWrapper col s9'
@@ -38,30 +39,36 @@ const Title = styled.h4.attrs({
 `
 
 class HistoryNews extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+          articles: [],
+          isLoading: false,
+        };
+      //  this.onFavorite = this.onFavorite.bind(this);
+      }
+      componentDidMount = async () => {
+        this.setState({ isLoading: true })
+        await NewsAsset.getArticles().then(articles => {
+            console.log(articles);
+          this.setState({
+            isLoading: false,
+            articles: articles.articles.slice(0,4)
+          })
+        })
+      }
     render() {
+        const { articles } = this.state;
         return (
             <Wrapper>
-                <Title>News in History <ViewAll>View All <i class="fas fa-chevron-right"></i></ViewAll></Title>
-                <NewsCard
-                    title="Who is Caligula?"
-                    image="https://i.imgur.com/lVh1I9H.jpg"
-                    description="Take a deep dive look into the so-called 'Mad Emperor' of Rome"
+                <Title>News in History <ViewAll>View All <i className="fas fa-chevron-right"></i></ViewAll></Title>
+                {articles.map(articles => 
+                    <NewsCard
+                        title={articles.title}
+                        image={articles.urlToImage}
+                        description={articles.description}
                     />
-                <NewsCard
-                    title="The Majesty of Amarna"
-                    image="https://i.imgur.com/UvgL7yf.jpg"
-                    description="A mad king or a visionary? A look into what the period ushered"
-                    />
-                <NewsCard
-                    title="The Peasent Revolt"
-                    image="https://i.imgur.com/n9TIXGN.jpg"
-                    description="A big turning point in English history and the reprocusions that lasts"
-                    />
-                <NewsCard
-                    title="What Voltaire Teachs Us"
-                    image="https://i.imgur.com/41QmhH7.jpg"
-                    description="The life and times of Voltaire's philosophical works and literature"
-                    />
+                )}
             </Wrapper>
         )
     }

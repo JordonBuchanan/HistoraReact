@@ -25,7 +25,7 @@ const H6 = styled.h6.attrs({
     font-weight:500;
     font-size:20px;
     letter-spacing:0.15px;
-    margin-top:150px;
+    margin-top:100px;
 `
 
 const P = styled.p.attrs({
@@ -34,6 +34,8 @@ const P = styled.p.attrs({
     font-size:14px;
     letter-spacing:0.25px;
 `
+
+
 
 const NewsCard = ({
     title,
