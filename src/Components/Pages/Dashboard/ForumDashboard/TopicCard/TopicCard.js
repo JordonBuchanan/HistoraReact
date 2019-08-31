@@ -6,6 +6,8 @@ const PostWrapper = styled.div.attrs({
     className: 'postWrapper col s12'
 })`
     margin-bottom: 15px !important;
+    overflow:hidden;
+    max-height: 250px;
 `
 const SubPostWrapper = styled.div.attrs({
     className: 'subPostWrapper col s11'
@@ -60,6 +62,20 @@ const Avatar = styled.img.attrs({
     width:65px;
     margin:10px 10px 10px 0 !important;
 `
+const Span = styled.div.attrs({
+    className: 'topicCardImg col s1'
+})`
+    height:50px;
+    width:50px;
+    border-radius: 10px;
+    background-position: center !important;
+    background-size: cover !important;
+`
+const Div = styled.div.attrs({
+    className: 'subTopicCardDiv'
+})`
+   margin:5px 0 10px;
+`
 
 const TopicCard = ({
     id,
@@ -83,6 +99,20 @@ const TopicCard = ({
             <SubPostWrapper>
                 <TheDate>{cdate}</TheDate>
                 <Title onClick={onClick}>{title}</Title>
+                {image !== "" &&
+                    <Div>
+                        <Span style={{background: 
+                           `linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.0)), 
+                            url(${image})`}}>
+                        </Span>
+                        <div className="col s11">
+                            <p className="truncate">{body}</p>
+                        </div>
+                    </Div>
+                }
+                {image === "" &&
+                    <p className="truncate">{body}</p>
+                }
                 <UserCommentLike>By {user}
                     <Margin>{comments} <i className="far fa-comment"></i></Margin>
                     <Margin>{likes} <i className="far fa-thumbs-up" onClick={onLike}></i></Margin>
