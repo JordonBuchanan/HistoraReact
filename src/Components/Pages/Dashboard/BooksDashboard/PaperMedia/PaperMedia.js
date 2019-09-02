@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import PaperCard from './PaperCard/PaperCard';
+import { AssetService } from '../../../../../Services/AssetService';
 
 const Wrapper = styled.div.attrs({
   className: 'col s12'
@@ -38,31 +39,41 @@ const ViewAll = styled.p.attrs({
   `
 
 class PaperMedia extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      isLoading: false,
+      papers: [],
+      allPapers:[]
+    };
+    //this.viewAll = this.viewAll.bind(this);
+  //  this.onFavorite = this.onFavorite.bind(this);
+  }
+  componentDidMount = async () => {
+    this.setState({ isLoading: true })
+    await AssetService.getPaperMedias().then(papers => {
+      this.setState({
+        papers: papers.slice(0,3),
+        allPapers: papers,
+        isLoading: false,
+      })
+    })
+  }
     render() {
+      const { papers } = this.state;
       return (
         <Wrapper>
             <Title>Articles <ViewAll>View All <i class="fas fa-chevron-right"></i></ViewAll></Title>
-            <PaperCard
-                title="Tomb of Richard the 2nd"
-                image="https://i.imgur.com/n9TIXGN.jpg"
-                description="We take a look at the tomb of Richard the 2nd and treasure hidden within"
-                author="Celeste Turner"
-                source="National Geographic"
-            />
-            <PaperCard
-                title="Tomb of Richard the 2nd"
-                image="https://i.imgur.com/n9TIXGN.jpg"
-                description="We take a look at the tomb of Richard the 2nd and treasure hidden within"
-                author="Jordon Buchanan"
-                source="History.com"
-            />
-            <PaperCard
-                title="Tomb of Richard the 2nd"
-                image="https://i.imgur.com/n9TIXGN.jpg"
-                description="We take a look at the tomb of Richard the 2nd and treasure hidden within"
-                author="Conrad Burtrem"
-                source="Historic News"
-            />
+            {papers.map(papers => 
+              <PaperCard
+                  title={papers.title}
+                  image={papers.image}
+                  description={papers.body}
+                  author={papers.author}
+                  source={papers.source}
+                  link={papers.link}
+              />
+            )}
         </Wrapper>
         );
     }

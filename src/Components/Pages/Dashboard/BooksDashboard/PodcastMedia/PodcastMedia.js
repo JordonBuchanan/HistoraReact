@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import MediaCard from '../MediaCard/MediaCard';
+import { AssetService } from '../../../../../Services/AssetService';
 
 const Wrapper = styled.div.attrs({
   className: 'col s6'
@@ -38,34 +39,40 @@ const ViewAll = styled.p.attrs({
   `
 
 class PodcastMedia extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      isLoading: false,
+      podcasts: [],
+      allPodcasts:[]
+    };
+    //this.viewAll = this.viewAll.bind(this);
+  //  this.onFavorite = this.onFavorite.bind(this);
+  }
+  componentDidMount = async () => {
+    this.setState({ isLoading: true })
+    await AssetService.getPodcastMedias().then(podcasts => {
+      this.setState({
+        podcasts: podcasts.slice(0,4),
+        allPodcasts: podcasts,
+        isLoading: false,
+      })
+    })
+  }
     render() {
+      const { podcasts } = this.state;
       return (
         <Wrapper>
             <Title>Podcasts <ViewAll>View All <i class="fas fa-chevron-right"></i></ViewAll></Title>
-            <MediaCard
-            title="Fall of the Roman Empire"
-            author="History Podcast"
-            image="https://i.imgur.com/O3etUni.jpg"
-            source="SoundCloud"
-          />
-            <MediaCard
-            title="Fall of the Roman Empire"
-            author="History Podcast"
-            image="https://i.imgur.com/O3etUni.jpg"
-            source="RSS"
-          />
-            <MediaCard
-            title="Fall of the Roman Empire"
-            author="History Podcast"
-            image="https://i.imgur.com/O3etUni.jpg"
-            source="Spec.fm"
-          />
-            <MediaCard
-            title="Fall of the Roman Empire"
-            author="History Podcast"
-            image="https://i.imgur.com/O3etUni.jpg"
-            source="SoundCloud"
-          />
+            {podcasts.map(podcasts => 
+              <MediaCard
+              title={podcasts.title}
+              author={podcasts.author}
+              image={podcasts.image}
+              source={podcasts.source}
+              link={podcasts.link}
+            />
+            )}
         </Wrapper>
         );
     }

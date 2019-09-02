@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 import { registerUser } from '../../actions/authActions';
 import TextFieldGroup from '../Common/TextFieldGroup';
 import styled from 'styled-components';
-import Background from './registerBG.jpg';
+import Background from './loginBG.jpg';
 
 const Wrapper = styled.div.attrs({
     className: 'registerWrapper'
 })`
     height: 100vh;
     background:linear-gradient(to left, rgba(0,0,0,0.65), rgba(0,0,0,0.65)),url(${Background});
-    background-size:cover;
+    background-size:cover !important;
     #WhySignUp{
         padding:0 5vw;
     }

@@ -15,9 +15,13 @@ const CardWrapper = styled.div.attrs({
         padding-left: 15px;
     }
     .card{
-        margin-top:0 !important;
+        margin-top:0 !important;    
+        margin-bottom:0 !important;    
+        height:400px;
+        overflow:hidden;
         border-top-left-radius:10px;
         border-top-right-radius:10px;
+        box-shadow:none;
     }
     .card-image{
         overflow:hidden;
@@ -29,6 +33,9 @@ const CardWrapper = styled.div.attrs({
         height:65px;
         padding-top:2.5px !important;
         border-top:none;
+        background:white;
+        border-bottom-left-radius:10px;
+        border-bottom-right-radius:10px;
     }
     .card-title{
         font-weight:500;
@@ -40,9 +47,15 @@ const CardWrapper = styled.div.attrs({
         top:0;
         font-size:14px;
     }
+    p{
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;  
+        overflow:hidden;
+    }
 `
 const SubWrapper = styled.div.attrs({
-    className: 'col s12'
+    className: 'col s12 z-depth-4'
 })`
     background: white;
     border-radius:10px;
@@ -63,7 +76,8 @@ const PaperCard = ({
     image,
     description,
     author,
-    source
+    source,
+    link
 }) => {
     return (
         <CardWrapper>
@@ -78,14 +92,14 @@ const PaperCard = ({
                         <Author>By {author}</Author>
                         <p>{description}</p>
                     </div>
-                    <div className="card-action">
-                        <div className="col s8">
-                            <button href="#">Read</button>
-                        </div>
-                        <div className="col s4">
-                            <i className="far fa-heart"></i>
-                            <i class="fas fa-share-alt"></i>                        
-                        </div>
+                </div>
+                <div className="card-action">
+                    <div className="col s8">
+                        <a target="_blank" rel="noopener noreferrer" href={link}><button>Read</button></a>
+                    </div>
+                    <div className="col s4">
+                        <i className="far fa-heart"></i>
+                        <i class="fas fa-share-alt"></i>                        
                     </div>
                 </div>
             </SubWrapper>
@@ -98,6 +112,7 @@ PaperCard.propTypes = {
     author: PropTypes.string.isRequired,
     source: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
+    link: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
 }
 

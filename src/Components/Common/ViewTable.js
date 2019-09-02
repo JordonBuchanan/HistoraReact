@@ -4,7 +4,9 @@ import styled from 'styled-components';
 
 const Table = styled.div.attrs({
     className: "col s12"
-})``
+})`
+    padding:0 10px !important;
+`
 
 const ViewTable = ({
     title,
@@ -15,7 +17,7 @@ const ViewTable = ({
 }) => {
     return (
         <Table>
-            <a href={link}>{title} by {author} from {source}</a>
+            <li><a href={link}>{title} by {author} from {source}</a></li>
         </Table>
     )
   }

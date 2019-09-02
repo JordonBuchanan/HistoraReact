@@ -15,7 +15,7 @@ const CardWrapper = styled.div.attrs({
         margin-top:25px;
         padding-left: 10px;
     }
-    p{
+    a{
       width:18vw
       margin:10px 0 0px;
     }
@@ -86,8 +86,8 @@ const MediaCard = ({
                     <Image style={{background: `url(${image})`}}></Image>
                 }
                 <div className="col s7">
-                    <p className="truncate">{title}</p>
-                    <small>{author}</small>
+                    <a href={link} className="truncate">{title}</a>
+                    <small className="truncate">{author}</small>
                 </div>
                 <div className="col s1">
                     <span className="hbadge">{source}</span>
