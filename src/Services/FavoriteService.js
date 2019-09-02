@@ -23,9 +23,6 @@ function favoritePost(id){
     const params = {body: id, admin: currentAdminSubject.value, headers: authHeader() || adminAuthHeader()}
     axios
     .post(`http://localhost:5000/api/${id}/favorite`, params)
-    .then(function(response){
-        console.log(response);
-    })
     .catch(err => {
         console.log(err);
     })

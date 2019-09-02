@@ -91,11 +91,12 @@ class Books extends Component {
     }
   }
   onFavorite = async (id) => {
+    const self = this;
     this.setState({ isLoading: true })
-    await FavoriteService.favoritePost(id).then(favorite => {
-      this.setState({
-        isLoading: false,
-      })
+    await FavoriteService.favoritePost(id)
+    window.flash('Media successfully favorited!', 'success')
+    self.setState({
+      isLoading: false,
     })
   }
     render() {
