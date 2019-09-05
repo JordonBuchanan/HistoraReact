@@ -44,6 +44,7 @@ function loginAdmin(email, password){
         .then(admin => {
             localStorage.setItem('currentAdmin', JSON.stringify(admin));
             currentAdminSubject.next(admin);
+            console.log(JSON.stringify(admin));
             return admin;
         });
 }

@@ -24,7 +24,7 @@ const Flash = () => {
     })
 
     return(
-        visibility && <div className={`alert alert-${type}`}>
+        visibility && <div className={`alert z-depth-4 alert-${type}`}>
             <span className="close"><strong>X</strong></span>
             <p>{message}</p>
         </div>

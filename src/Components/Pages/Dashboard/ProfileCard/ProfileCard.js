@@ -63,6 +63,7 @@ class ProfileCard extends Component {
     render() {
         const { currentUser } = this.state;
         const { currentAdmin } = this.state;
+        console.log(currentAdmin)
         return (
             <Wrapper>
                 {currentAdmin &&
@@ -77,6 +78,10 @@ class ProfileCard extends Component {
                 }
                 <Title>Administrator</Title>
                 <ProfileCardLinks/>
+                <small>Your Favorites</small>
+                {currentAdmin &&
+                    <p>{currentAdmin.admin.favorites}</p>
+                }
             </Wrapper>
         )
     }

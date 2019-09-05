@@ -90,10 +90,10 @@ class Books extends Component {
       });
     }
   }
-  onFavorite = async (id) => {
+  onFavorite = async (props) => {
     const self = this;
     this.setState({ isLoading: true })
-    await FavoriteService.favoritePost(id)
+    await FavoriteService.favoritePost(props)
     window.flash('Media successfully favorited!', 'success')
     self.setState({
       isLoading: false,
@@ -124,7 +124,7 @@ class Books extends Component {
                         link={books.link}
                         source={books.source}
                         key={books._id}
-                        onFavorite={() => this.onFavorite(books._id)}
+                        onFavorite={() => this.onFavorite(books)}
                       />
                     )}
                     {(active === 'ALLBOOKS') && all.map(all => 

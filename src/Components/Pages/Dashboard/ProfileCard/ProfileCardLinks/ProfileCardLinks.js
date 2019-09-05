@@ -53,7 +53,6 @@ class ProfileCardLinks extends Component {
                 <Link to="/dashboard/forum"><I className="fas fa-landmark "></I> The Forum</Link>
                 <Link to="/dashboard/books"><I className="fas fa-book "></I> Media</Link>
                 <Link to="/dashboard/historapicks"><I className="fas fa-star"></I> Histora's Picks</Link>
-                <small>Your Favorites</small>
             </Wrapper>
         )
     }

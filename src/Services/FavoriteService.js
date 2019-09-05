@@ -19,10 +19,11 @@ export const FavoriteService = {
     }
 };
 
-function favoritePost(id){
-    const params = {body: id, admin: currentAdminSubject.value, headers: authHeader() || adminAuthHeader()}
+function favoritePost(item){
+    console.log(item)
+    const params = {body: item, admin: currentAdminSubject.value, headers: authHeader() || adminAuthHeader()}
     axios
-    .post(`http://localhost:5000/api/${id}/favorite`, params)
+    .post(`http://localhost:5000/api/${item._id}/favorite`, params)
     .catch(err => {
         console.log(err);
     })
