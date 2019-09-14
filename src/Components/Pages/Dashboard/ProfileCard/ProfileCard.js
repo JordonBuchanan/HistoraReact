@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import ProfileCardLinks from './ProfileCardLinks/ProfileCardLinks';
-import { authenticationService } from '../../../../Services';
+import { authenticationService, FavoriteService } from '../../../../Services';
 
 const Wrapper = styled.div.attrs({
     className: 'col s2'
@@ -47,6 +47,21 @@ const Title = styled.p.attrs({
     font-size:14px !important;
     font-weight:400 !important;
 `
+const FavDiv = styled.div.attrs({
+    class: "favoritesSideDiv"
+})`
+    text-align: center;
+    a{
+        color: #FAFAFA;
+        padding: 2.5px 0;
+        font-size:12px;
+    }
+    .unfavoriteFav{
+        color: #F44336;
+        padding: 0 0 0 5px;
+        font-size:12px;
+    }
+`
 
 class ProfileCard extends Component {
     constructor(props){
@@ -55,15 +70,23 @@ class ProfileCard extends Component {
           currentUser: null,
           currentAdmin: null
         };
+      this.onUnfavorite = this.onUnfavorite.bind(this);
       }
       componentDidMount(){
         authenticationService.currentUser.subscribe(x => this.setState({ currentUser: x }));
         authenticationService.currentAdmin.subscribe(x => this.setState({ currentAdmin: x }));
       }
+      onUnfavorite = async (props) => {
+        const self = this;
+        this.setState({ isLoading: true })
+        await FavoriteService.unfavoritePost(props)
+        window.flash('Favorite Successfully Removed!', 'success')
+        self.setState({
+          isLoading: false,
+        })
+      }
     render() {
-        const { currentUser } = this.state;
-        const { currentAdmin } = this.state;
-        console.log(currentAdmin)
+        const { currentUser, currentAdmin } = this.state;
         return (
             <Wrapper>
                 {currentAdmin &&
@@ -80,7 +103,18 @@ class ProfileCard extends Component {
                 <ProfileCardLinks/>
                 <small>Your Favorites</small>
                 {currentAdmin &&
-                    <p>{currentAdmin.admin.favorites}</p>
+                    <FavDiv>
+                        {currentAdmin.admin.favorites.map(favorites => 
+                            <div>
+                                <a href={favorites.link} 
+                                    key={favorites._id}>
+                                    {favorites.title}
+
+                                </a>
+                                <span onClick={() => this.onUnfavorite(favorites._id)} className="unfavoriteFav">X</span>
+                            </div>
+                        )}
+                    </FavDiv>
                 }
             </Wrapper>
         )
