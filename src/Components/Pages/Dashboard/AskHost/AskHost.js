@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import background from './Jordon.jpeg';
-import TextFieldGroup from '../../../Common/TextFieldGroup'
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import { askHostService } from '../../../../Services';
+import { Mail } from 'styled-icons/icomoon';
 
 const Wrapper = styled.div.attrs({
     className: 'askHostWrapper col s12'
@@ -10,10 +13,11 @@ const Wrapper = styled.div.attrs({
     background-size:cover;
     border-radius:10px;
     height:300px;
-    .form-group{
-        padding-top:35vh !important;
+    form{
+        padding-top:27.5vh !important;
         input{
             background:#FAFAFA;
+            color: white !important;
 w        }
     }
 `
@@ -43,10 +47,37 @@ class AskHost extends Component {
             <div className="col s3">
                 <Title>Ask The Host</Title>
                 <Wrapper>
-                <TextFieldGroup
-                    label="Question? Suggestion? Request? Ask Here!"
-                    placeholder="Ask Something..."
-                    name="AskHost"
+                  <Formik 
+                    initialValues={{
+                        askHost:''
+                    }}
+                    validationSchema={Yup.object().shape({
+                        askHost: Yup.string().required('Must ask a question!')
+                    })}
+                    onSubmit={({ askHost }, { setStatus, setSubmitting, resetForm }) => {
+                        setStatus()
+                        askHostService.sendToHost(askHost)
+                        resetForm();
+                        window.flash('Sent to Host!', 'success')
+                    }}
+                    render={({ errors, status, touched, isSubmitting }) => (
+                        <Form>
+                            <div>
+                                <label htmlFor="askHost">Question? Suggestion? Request? Ask Here!</label>
+                                <Field name="askHost" placeholder="Ask Something..." type="text" className={(errors.askHost && touched.askHost ? ' is-invalid' : '')} />
+                                <ErrorMessage name="askHost" component="div" className="invalid-feedback" />
+                            </div>
+                            <div>
+                                <button type="submit" disabled={isSubmitting}>Send</button>
+                                {isSubmitting &&
+                                    <img alt="spinner" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                                }
+                            </div>
+                            {status &&
+                                <div className={'alert alert-danger'}>{status}</div>
+                            }
+                        </Form>
+                    )}
                     />
                 </Wrapper>
             </div>
